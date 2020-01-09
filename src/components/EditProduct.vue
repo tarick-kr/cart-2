@@ -43,12 +43,11 @@
           <v-container v-if="!isSelectParams">
             <v-row>
               <v-col cols="12" sm="6" md="4" v-for="(field, index) in this.editedSelectParams" :key="index">
-                <v-select
-                  :label="field.sym ? field.name + ' ' + field.sym + ', ' + field.unit : field.name"
-                  :value="field.value"
-                  required
-                  :items="changeSelectType[index].arraySelectItems"
-                  @input="updateSelect(index, $event)"
+                <input-select
+                  :data="field"
+                  :index="index"
+                  :selectType="cartItem.selectType"
+                  @onUpdate="updateSelect($event)"
                 />
               </v-col>
             </v-row>
@@ -96,7 +95,7 @@
 <script>
 import InputParam from './InputParam'
 import InputQuantity from './InputQuantity'
-// import InputSelect from './InputSelect'
+import InputSelect from './InputSelect'
 
 export default {
   name: 'EditProduct',
@@ -112,10 +111,9 @@ export default {
     }
   },
   components: {
-    // AppInput,
     InputParam,
-    InputQuantity
-    // InputSelect
+    InputQuantity,
+    InputSelect
   },
   props: {
     cartItem: {
@@ -207,10 +205,10 @@ export default {
       this.editedQuantity = Number(payload.newValue)
       this.editedQuantityValid = payload.valid
     },
-    updateSelect (index, newValue) {
+    updateSelect (payload) {
       for (let i = 0; i < this.editedSelectParams.length; i++) {
-        if (i === index) {
-          this.editedSelectParams[i].value = newValue
+        if (i === payload.index) {
+          this.editedSelectParams[i].value = payload.newValue
         }
       }
     }
