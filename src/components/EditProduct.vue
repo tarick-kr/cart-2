@@ -8,12 +8,9 @@
         </v-btn>
       </template>
       <v-card>
-        <v-card-title class="text-center px-1 px-sm-2 px-md-4">
-          <span class="headline font-weight-bold mx-auto">{{ cartItem.titleProduct }}</span>
+        <v-card-title class="text-center background-card-title px-1 px-sm-2 px-md-4 mb-4">
+          <span class="headline font-weight-bold mx-auto white--text">{{ cartItem.titleProduct }}</span>
         </v-card-title>
-        <div class="text-center px-1 px-sm-2 px-md-4">
-          <v-divider class="mb-4 divider-width-align"/>
-        </div>
         <v-img
           class="mb-4"
           :src="cartItem.imageProduct"
@@ -244,5 +241,7 @@ export default {
 .divider-width-align
   margin: 0 auto
   max-width: calc(100% - 26px)
+.background-card-title
+  background-color: #1E88E5
 
 </style>
